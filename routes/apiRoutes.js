@@ -30,18 +30,35 @@ module.exports = (app) => {
   // (ex. User fills out a reservation request... this data is then sent to the server...
   // Then the server saves the data to the tableData array)
   // ---------------------------------------------------------------------------
-  //app.post("/api/notes",  (req, res) => {
+  app.post("/api/notes",  (req, res) => {
 
     // Note the code here. Our "server" will respond to requests and let users know if they have a table or not.
     // It will do this by sending out the value "true" have a table
     // req.body is available since we're using the body parsing middleware
     // Add unique id to each note
-    //db.forEach((obj, i) => {
-      //obj.id = i + 1;
-    //});
-    // Return the new note to the client
-    //fs.writeFile("./db/db.json", JSON.stringify(db), () => {
-     // res.json(db);
+    let newNote = req.body;
+
+    //Reads the JSON file asynchronous
+    let dbFile = fs.readFileSync(path.join(__dirname, "./db/db.json"), "public/assets/index.html");
+
+    //Turn object into JSON format to work it out 
+    let dbFileJSON = JSON.parse(dbFile);
+
+    //Call function to generate new ID
+    //newNote.id = generatesId(dbFileJSON);
+    //newNote.id = uuid.v4();
+
+    //pushs the new note to the notes array
+    dbFileJSON.push(newNote);
+
+    //Overrides the jsondb file with the new note pushed
+    //Stringify the JSON array is necesary to write the file with the JSON like object string representation, otherwise we might write a bunch of [Object][Object]
+    fs.writeFileSync(path.join(__dirname, "./db/db.json"), JSON.stringify(dbFileJSON), "public/assets/notes.html");
+
+    //returns the new note added to the user
+    return res.json(newNote);
+
+});
    // });
   //});
 
