@@ -4,6 +4,7 @@
 
 const db = require("../db/db.json");
 const fs = require("fs");
+const path = require('path');
 
 // ROUTING
 
@@ -15,7 +16,7 @@ module.exports = (app) => {
   app.get("/api/notes", (req, res) => {
     // Read the db.json file and return all saved notes as JSON
     //Reads the json file async
-    let dbFile = fs.readFileSync(path.join(__dirname, "db", "db.json"), "utf8");
+    let dbFile = fs.readFileSync(path.join(__dirname, "../db/db.json"), "utf8");
     //Parsing the file is necesary to displayed it like a JSON object array
     let dbFileJSON = JSON.parse(dbFile);
     //Return the json db file to the user
@@ -39,7 +40,7 @@ module.exports = (app) => {
     let newNote = req.body;
 
     //Reads the JSON file asynchronous
-    let dbFile = fs.readFileSync(path.join(__dirname, "./db/db.json"), "public/assets/index.html");
+    let dbFile = fs.readFileSync(path.join(__dirname, "../db/db.json"), "utf8");
 
     //Turn object into JSON format to work it out 
     let dbFileJSON = JSON.parse(dbFile);
@@ -53,7 +54,7 @@ module.exports = (app) => {
 
     //Overrides the jsondb file with the new note pushed
     //Stringify the JSON array is necesary to write the file with the JSON like object string representation, otherwise we might write a bunch of [Object][Object]
-    fs.writeFileSync(path.join(__dirname, "./db/db.json"), JSON.stringify(dbFileJSON), "public/assets/notes.html");
+    fs.writeFileSync(path.join(__dirname, "../db/db.json"), JSON.stringify(dbFileJSON), "utf8");
 
     //returns the new note added to the user
     return res.json(newNote);
