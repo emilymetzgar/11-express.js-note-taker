@@ -15,9 +15,9 @@ module.exports = (app) => {
   app.get("/api/notes", (req, res) => {
     // Read the db.json file and return all saved notes as JSON
     //Reads the json file async
-    const dbFile = fs.readFileSync(path.join(__dirname, "db", "db.json"), "utf8");
+    let dbFile = fs.readFileSync(path.join(__dirname, "db", "db.json"), "utf8");
     //Parsing the file is necesary to displayed it like a JSON object array
-    const dbFileJSON = JSON.parse(dbFile);
+    let dbFileJSON = JSON.parse(dbFile);
     //Return the json db file to the user
     return res.json(dbFileJSON);
 
@@ -59,8 +59,6 @@ module.exports = (app) => {
     return res.json(newNote);
 
 });
-   // });
-  //});
 
 
 };
