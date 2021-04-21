@@ -2,7 +2,7 @@
 // We are linking our routes to a series of "data" sources.
 // These data sources hold arrays of information on table-data, waitinglist, etc.
 
-const db = require("../db/db.json");
+let db = require("../db/db.json");
 const fs = require("fs");
 const path = require('path');
 const uuid = require('uuid');
@@ -61,7 +61,7 @@ module.exports = (app) => {
     return res.json(newNote);
 
 });
-app.delete("/api/notes/:id", (req, res) => {
+app.get("/api/notes/:id", (req, res) => {
   let noteId = req.params.id;
   let newId = 0;
   console.log(`Deleting note with id ${noteId}`);
@@ -78,4 +78,3 @@ app.delete("/api/notes/:id", (req, res) => {
 }); 
 };
 
-};
