@@ -5,6 +5,7 @@
 const db = require("../db/db.json");
 const fs = require("fs");
 const path = require('path');
+const uuid = require('uuid');
 
 // ROUTING
 
@@ -60,6 +61,21 @@ module.exports = (app) => {
     return res.json(newNote);
 
 });
-
+app.delete("/api/notes/:id", (req, res) => {
+  let noteId = req.params.id;
+  let newId = 0;
+  console.log(`Deleting note with id ${noteId}`);
+  db = db.filter(currentNote => {
+     return currentNote.id != noteId;
+  });
+  for (currentNote of db) {
+      currentNote.id = newId.toString();
+      newId++;
+  }
+  let dbFile = fs.readFileSync(path.join(__dirname, "../db/db.json"), "utf8");
+  fs.writeFileSync(path.join(__dirname, "../db/db.json"), JSON.stringify(db));
+  res.json(db);
+}); 
+};
 
 };
