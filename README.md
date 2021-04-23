@@ -14,9 +14,9 @@ Open the note taker and you are presented with a landing page with a link to a n
 
 
 
-![A screenshot of the application](./assets/images/screenshot.PNG)
+![A screenshot of the application](./public/assets/images/screenshot.PNG)
 
-link to entire application at heroku: 
+link to entire application at heroku: https://peaceful-bastion-33525.herokuapp.com/
 
 ## Credits
 Emily Metzgar
